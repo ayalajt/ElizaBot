@@ -6,6 +6,10 @@ import time
 
 infiniteLoop = True
 
+def chooseResponse(userInput):
+    if (re.search("feeling", userInput)):
+        print("[SYBIL]: Why are you feeling sad")
+
 def checkQuit(userInput):
      if re.match("quit", userInput):
             print("[SYBIL]: Goodbye!")
@@ -13,19 +17,24 @@ def checkQuit(userInput):
 
 def main():
     global infiniteLoop
+    introChat = False
     while infiniteLoop:
-        print("[SYBIL]: Hello! I am Sybil. What's your name?") 
-        userInput = input("[USER]: ")
-        if checkQuit(userInput): break
-        if re.match("^[A-Za-z]*$", userInput):
-            userName = userInput
-            print('[SYBIL]: Nice to meet you {}!'.format(userName))
-            time.sleep(1)
-            print('[SYBIL]: What brings you here today {}?'.format(userName))
-            userInput = input("[{}]: ".format(userName.upper()))
+        if introChat == False:
+            print("[SYBIL]: Hello! My name is Sybil. What's your name?") 
+            userInput = input("[USER]: ")
             if checkQuit(userInput): break
-        else:
-            print("[SYBIL]: Please input a valid name.")
+            if re.match("^[A-Za-z]*$", userInput):
+                userName = userInput
+                print('[SYBIL]: Nice to meet you {}!'.format(userName))
+                time.sleep(1)
+                print('[SYBIL]: What brings you here today {}?'.format(userName))
+                introChat = True
+            else:
+                print("[SYBIL]: Please input a valid name.")
+        # After intro has played
+        userInput = input("[{}]: ".format(userName.upper()))
+        if checkQuit(userInput): break
+        chooseResponse(userInput)
 
 if __name__ == '__main__':
     main()
