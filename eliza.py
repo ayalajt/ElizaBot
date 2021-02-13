@@ -13,31 +13,62 @@ userName = "null"
 def changeWords(userInput):
     if re.match("^I ", userInput):
         userInput = re.sub("^I ", "you ", userInput)
-    if re.match(r"\sI\s", userInput):
-        userInput = re.sub(r"\sI\s", " you ", userInput)
+    if re.match("I", userInput):
+        userInput = re.sub("I", "you", userInput)
+    print(userInput)
     return userInput
 
 def chooseResponse(userInput):
+    randomChoiceNum = 1
     ## could also change a word's tense before looking for a valid reponse, i.e. cried -> cry
-    if (re.search("feeling (.+)", userInput)):
-        match = re.search("feeling (.+)", userInput)
+    if (re.search("I am feeling (.+)", userInput)):
+        match = re.search("I am feeling (.+)", userInput)
         print("[SYBIL]: Why are you feeling {}?".format(match.group(1)))
-    elif (re.search("feel (.+)", userInput)):
-        match = re.search("feel (.+)", userInput)
+
+    elif (re.search("I feel (.+)", userInput)):
+        match = re.search("I feel (.+)", userInput)
         print("[SYBIL]: Why do you feel {}?".format(match.group(1)))
-    elif (re.search("want to (.+)", userInput)):
-        match = re.search("want to (.+)", userInput)
-        print("[SYBIL]: {}, Why do you want to {}?".format(userName, match.group(1)))
-    elif (re.search("(B|b)ecause my (.+)", userInput)):
-        match = re.search("(B|b)ecause my (.+)", userInput)
-        print("[SYBIL]: {}, Why did your {}?".format(userName, match.group(2)))
+
+    elif (re.search("I want to (.+)", userInput)):
+        match = re.search("I want to (.+)", userInput)
+        print("[SYBIL]: {}, why do you want to {}?".format(userName, match.group(1)))
+
+    elif (re.search("Because my (.+)", userInput)):
+        match = re.search("Because my (.+)", userInput)
+        print("[SYBIL]: {}, Why did your {}?".format(userName, match.group(1)))
+
     elif (re.search("I need (.+)", userInput)):
-        #userInput = changeWords(userInput)
+        #newUserInput = changeWords(userInput)
         match = re.search("I need (.+)", userInput)
         print("[SYBIL]: Why do you need {}, {}?".format(match.group(1), userName))
+
     elif (re.search("I think (.+)", userInput)):
         match = re.search("I think (.+)", userInput)
         print("[SYBIL]: Why do you think {}, {}?".format(match.group(1), userName))
+
+    elif (re.search("You (.+)", userInput)):
+        match = re.search("You (.+)", userInput)
+        print("[SYBIL]: {}, let's focus on you and not me.".format(userName))
+
+    elif (re.search("(.+) mother (.+)", userInput)):
+        match = re.search("(.+) mother (.+)", userInput)
+        print("[SYBIL]: How does your mother make you feel?")
+
+    elif (re.search("(.+) father (.+)", userInput)):
+        match = re.search("(.+) father (.+)", userInput)
+        print("[SYBIL]: How do you feel about your father, {}?".format(userName))
+
+    elif (re.search("makes me (.+)", userInput)):
+        match = re.search("makes me (.+)", userInput)
+        print("[SYBIL]: {}, why does it make you {}?".format(userName, match.group(1)))
+
+    elif (re.search("I can't (.+)", userInput)):
+        match = re.search("I can't (.+)", userInput)
+        print("[SYBIL]: Are you sure you can't {}, {}?".format(match.group(1), userName))
+
+    elif (re.search("((H|h)ello|(H|h)i) (.+)", userInput)):
+        print("[SYBIL]: Hello to you too, {}.".format(userName))
+
     else:
         randomChoiceNum = random.randint(1,5)
         if randomChoiceNum == 1:
