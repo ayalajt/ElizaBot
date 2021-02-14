@@ -19,68 +19,95 @@ def changeWords(userInput):
     return userInput
 
 def chooseResponse(userInput):
-    randomChoiceNum = 1
+    # sorted by precedence
+    randomChoice = -1
     ## could also change a word's tense before looking for a valid reponse, i.e. cried -> cry
-    if (re.search("I am feeling (.+)", userInput)):
-        match = re.search("I am feeling (.+)", userInput)
+    if (re.search(r"I am feeling ([A-za-z\s]*)", userInput)):
+        match = re.search(r"I am feeling ([A-za-z\s]*)", userInput)
         print("[SYBIL]: Why are you feeling {}?".format(match.group(1)))
 
-    elif (re.search("I feel (.+)", userInput)):
-        match = re.search("I feel (.+)", userInput)
+    elif (re.search(r"I feel ([A-za-z\s]*)", userInput)):
+        match = re.search(r"I feel ([A-za-z\s]*)", userInput)
         print("[SYBIL]: Why do you feel {}?".format(match.group(1)))
 
-    elif (re.search("I want to (.+)", userInput)):
-        match = re.search("I want to (.+)", userInput)
+    elif (re.search(r"I want to ([A-za-z\s]*)", userInput)):
+        match = re.search(r"I want to ([A-za-z\s]*)", userInput)
         print("[SYBIL]: {}, why do you want to {}?".format(userName, match.group(1)))
 
-    elif (re.search("Because my (.+)", userInput)):
-        match = re.search("Because my (.+)", userInput)
+    elif (re.search(r"Because my ([A-za-z\s]*)", userInput)):
+        match = re.search(r"Because my ([A-za-z\s]*)", userInput)
         print("[SYBIL]: {}, Why did your {}?".format(userName, match.group(1)))
 
-    elif (re.search("I need (.+)", userInput)):
+    elif (re.search(r"I need ([A-za-z\s]*)", userInput)):
         #newUserInput = changeWords(userInput)
-        match = re.search("I need (.+)", userInput)
+        match = re.search(r"I need ([A-za-z\s]*)", userInput)
         print("[SYBIL]: Why do you need {}, {}?".format(match.group(1), userName))
 
-    elif (re.search("I think (.+)", userInput)):
-        match = re.search("I think (.+)", userInput)
+    elif (re.search(r"I think ([A-za-z\s]*)", userInput)):
+        match = re.search(r"I think ([A-za-z\s]*)", userInput)
         print("[SYBIL]: Why do you think {}, {}?".format(match.group(1), userName))
 
-    elif (re.search("You (.+)", userInput)):
-        match = re.search("You (.+)", userInput)
+    elif (re.search(r"(A|a)re you ([A-za-z\s]*)", userInput)):
+        match = re.search(r"(A|a)re you ([A-za-z\s]*)", userInput)
+        print("[SYBIL]: It's possible that I am {}, who knows?".format(match.group(2)))
+
+    elif (re.search(r"(Y|y)ou ([A-za-z\s]*)", userInput)):
+        match = re.search(r"You ([A-za-z\s]*)", userInput)
         print("[SYBIL]: {}, let's focus on you and not me.".format(userName))
 
-    elif (re.search("(.+) mother (.+)", userInput)):
-        match = re.search("(.+) mother (.+)", userInput)
+    elif (re.search(r"(I am|I'm) ([A-za-z\s]*)", userInput)):
+        match = re.search(r"(I am|I'm) ([A-za-z\s]*)", userInput)
+        print("[SYBIL]: How does being {} make you feel?".format(match.group(2)))
+
+    elif (re.search(r"(.+) mother ([A-za-z\s]*)", userInput)):
+        match = re.search(r"(.+) mother ([A-za-z\s]*)", userInput)
         print("[SYBIL]: How does your mother make you feel?")
 
-    elif (re.search("(.+) father (.+)", userInput)):
-        match = re.search("(.+) father (.+)", userInput)
+    elif (re.search(r"(.+) father ([A-za-z\s]*)", userInput)):
+        match = re.search(r"(.+) father ([A-za-z\s]*)", userInput)
         print("[SYBIL]: How do you feel about your father, {}?".format(userName))
 
-    elif (re.search("makes me (.+)", userInput)):
-        match = re.search("makes me (.+)", userInput)
+    elif (re.search(r"(.+) family ([A-za-z\s]*)", userInput)):
+        match = re.search(r"(.+) family ([A-za-z\s]*)", userInput)
+        print("[SYBIL]: Tell me more about your family, {}.".format(userName))
+
+    elif (re.search(r"makes me ([A-za-z\s]*)", userInput)):
+        match = re.search(r"makes me ([A-za-z\s]*)", userInput)
         print("[SYBIL]: {}, why does it make you {}?".format(userName, match.group(1)))
 
-    elif (re.search("I can't (.+)", userInput)):
-        match = re.search("I can't (.+)", userInput)
+    elif (re.search(r"I can't ([A-za-z\s]*)", userInput)):
+        match = re.search(r"I can't ([A-za-z\s]*)", userInput)
         print("[SYBIL]: Are you sure you can't {}, {}?".format(match.group(1), userName))
 
-    elif (re.search("((H|h)ello|(H|h)i) (.+)", userInput)):
-        print("[SYBIL]: Hello to you too, {}.".format(userName))
+    elif (re.search(r"((H|h)ello|(H|h)i) ([A-za-z\s]*)", userInput)):
+        print("[SYBIL]: Hello to you too {}.".format(userName))
+
+    elif (re.search(r"(W|w)hy don't you ([A-za-z\s]*)", userInput)):
+        match = re.search(r"(W|w)hy don't you ([A-za-z\s]*)", userInput)
+        print("[SYBIL]: Are you sure you want me to {}?".format(match.group(1)))
+
+    elif (re.search(r"(W|w)hy can't I ([A-za-z\s]*)", userInput)):
+        match = re.search(r"(W|w)hy can't I ([A-za-z\s]*)", userInput)
+        print("[SYBIL]: Are you sure you can't {}?".format(match.group(1)))
+
+    elif(re.search(r"How ([A-za-z\s]*)\?", userInput)):
+        print("[SYBIL]: How do you suppose?")
+
+    elif(re.search(r"What ([A-za-z\s]*)\?", userInput)):
+        randomChoice = random.randint(1,2)
+        if randomChoice == 1: print("[SYBIL]: How would an answer to that question make you feel?")
+        if randomChoice == 2: print("[SYBIL]: {}, what do you think the answer to that is?".format(userName))
+
+    elif (re.search(r"(.+) sorry ([A-za-z\s]*)", userInput)):
+        print("[SYBIL]: {}, How does apologizing make you feel?".format(userName))
 
     else:
-        randomChoiceNum = random.randint(1,5)
-        if randomChoiceNum == 1:
-            print("[SYBIL]: Please, tell me more.")
-        if randomChoiceNum == 2: 
-            print("[SYBIL]: Could you explain some more?")
-        if randomChoiceNum == 3:
-            print("[SYBIL]: Please, could you elaborate some more?")
-        if randomChoiceNum == 4:
-            print("[SYBIL]: Is there more to that?")
-        if randomChoiceNum == 5:
-            print("[SYBIL]: Why do you say that?")
+        randomChoice = random.randint(1,5)
+        if randomChoice == 1: print("[SYBIL]: Please, tell me more.")
+        if randomChoice == 2: print("[SYBIL]: Could you explain some more?")
+        if randomChoice == 3: print("[SYBIL]: Please, could you elaborate some more?")
+        if randomChoice == 4: print("[SYBIL]: Is there more to that?")
+        if randomChoice == 5: print("[SYBIL]: Why do you say that?")
        
 def checkQuit(userInput):
      if re.match("quit", userInput):
