@@ -188,6 +188,13 @@ def chooseResponse(userInput):
         if randomChoice == 2: print("[SYBIL]: {}, how do you feel about your {}?".format(userName, match.group(1)))
         if randomChoice == 3: print("[SYBIL]: How does your {} make you feel, {}?".format(match.group(1), userName))
 
+    elif (re.search(r"\b((G|g)irlfriend|(B|b)oyfriend|(S|s)pouse|(W|w)ife|(H|h)usband)\b", userInput)):
+        match = re.search(r"\b((G|g)irlfriend|(B|b)oyfriend|(S|s)pouse|(W|w)ife|(H|h)usband)\b", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: What else can you say about your {}, {}?".format(match.group(1), userName))
+        if randomChoice == 2: print("[SYBIL]: {}, how do you feel about your {}?".format(userName, match.group(1)))
+        if randomChoice == 3: print("[SYBIL]: How does your {} make you feel, {}?".format(match.group(1), userName))
+
     elif (re.search(r"makes me ([A-za-z\s']*)", userInput)):
         match = re.search(r"makes me ([A-za-z\s']*)", userInput)
         randomChoice = random.randint(1,3)
@@ -207,12 +214,40 @@ def chooseResponse(userInput):
         if randomChoice == 2: print("[SYBIL]: {}, you seem certain. Is that so?".format(userName))
         if randomChoice == 3: print("[SYBIL]: Why do you feel so certain?")
 
+    elif (re.search(r"((C|c)ertain|(C|c)onfident)", userInput)):
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: You sound certain, {}. What if that is not the case?".format(userName))
+        if randomChoice == 2: print("[SYBIL]: {}, you seem certain. Is that so?".format(userName))
+        if randomChoice == 3: print("[SYBIL]: Why do you feel so certain?")
+    
+    elif (re.search(r"I know ([A-za-z\s']*)", userInput)):
+        match = re.search(r"I know ([A-za-z\s']*)", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Are you confident you know {}, {}?".format(match.group(1), userName))
+        if randomChoice == 2: print("[SYBIL]: What else do you know about {}?".format(match.group(1)))
+        if randomChoice == 3: print("[SYBIL]: What if you don't know {}?".format(match.group(1)))
+
+    elif (re.search(r"I (don't|do not) know ([A-za-z\s']*)", userInput)):
+        match = re.search(r"I (don't|do not) know ([A-za-z\s']*)", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Why don't you know {}, {}?".format(match.group(2), userName))
+        if randomChoice == 2: print("[SYBIL]: What makes you think you don't know {}?".format(match.group(2)))
+        if randomChoice == 3: print("[SYBIL]: Are you sure you don't know?")
+
+
     elif (re.search(r"I (can't|cannot) ([A-za-z\s']*)", userInput)):
         match = re.search(r"I (can't|cannot) ([A-za-z\s']*)", userInput)
         randomChoice = random.randint(1,3)
         if randomChoice == 1: print("[SYBIL]: Are you certain you can't {}, {}?".format(match.group(2), userName))
         if randomChoice == 2: print("[SYBIL]: What makes you think you can't {}?".format(match.group(2)))
         if randomChoice == 3: print("[SYBIL]: Why do you feel uncertain?")
+
+    elif (re.search(r"I (don't|do not) ([A-za-z\s']*)", userInput)):
+        match = re.search(r"I (don't|do not) ([A-za-z\s']*)", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Are you certain you don't {}, {}?".format(match.group(2), userName))
+        if randomChoice == 2: print("[SYBIL]: What makes you think you don't {}?".format(match.group(2)))
+        if randomChoice == 3: print("[SYBIL]: Are you sure you don't?")
 
     elif (re.search(r"(W|w)hy can't I ([A-za-z\s']*)\?", userInput)):
         match = re.search(r"(W|w)hy can't I ([A-za-z\s']*)\?", userInput)
@@ -267,6 +302,99 @@ def chooseResponse(userInput):
         if randomChoice == 2: print("[SYBIL]: {}, What do you think the answer to that question is?".format(userName))
         if randomChoice == 3: print("[SYBIL]: How would you answer that, {}?".format(userName))
 
+    # More specific word responses
+    elif (re.search(r"\b(L|l)ove\b", userInput)):
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Let's talk more about love. Are there others you love?")
+        if randomChoice == 2: print("[SYBIL]: Do you feel as if you receieve enough love?")
+        if randomChoice == 3: print("[SYBIL]: Let's focus on love. Are there people in your life that you love?")
+
+    elif (re.search(r"\b((D|d)ie|(D|d)eath|(K|k)ill|(S|s)uicide|(H|h)ate)\b", userInput)):
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Those are some pretty strong words. Why do you feel that way?")
+        if randomChoice == 2: print("[SYBIL]: What makes you have those strong feelings?")
+        if randomChoice == 3: print("[SYBIL]: Let's focus on positivity. Is there anyone that makes you feel happy?")
+    
+    elif (re.search(r"\b((A|a)ngry|(M|m)ad|(A|a)nnoyed|(I|i)rritated)\b", userInput)):
+        match = re.search(r"\b((A|a)ngry|(M|m)ad|(A|a)nnoyed|(I|i)rritated)\b", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Is there someone in particular that makes you {}?".format(match.group(1)))
+        if randomChoice == 2: print("[SYBIL]: {}, let's try not to be too negative. Is there anything that makes you feel happy?".format(userName))
+        if randomChoice == 3: print("[SYBIL]: How come you feel {}, {}?".format(match.group(1), userName))
+
+    elif (re.search(r"\b((H|h)appy|(E|e)xcited)\b", userInput)):
+        match = re.search(r"\b((H|h)appy|(E|e)xcited)\b", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Positive feelings are good. Are there others that by chance make you {}?".format(match.group(1)))
+        if randomChoice == 2: print("[SYBIL]: {}, what else makes you {}?".format(userName, match.group(1)))
+        if randomChoice == 3: print("[SYBIL]: How come you feel {}, {}?".format(match.group(1), userName))
+
+    elif (re.search(r"\b((S|s)ad|(U|u)nhappy|(D|d)epressed|(M|m)iserable)\b", userInput)):
+        match = re.search(r"\b((S|s)ad|(U|u)nhappy|(D|d)epressed|(M|m)iserable)\b", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Sometimes it's okay to feel {}, {}. Are there any positives in your life you want to talk about?".format(match.group(1), userName))
+        if randomChoice == 2: print("[SYBIL]: {}, why do you feel {}?".format(userName, match.group(1)))
+        if randomChoice == 3: print("[SYBIL]: Are there other reasons you feel {}, {}?".format(match.group(1), userName))
+
+    elif (re.search(r"\b((C|c)rave|(D|d)esire|(Y|y)earn)\b", userInput)):
+        match = re.search(r"\b((C|c)rave|(D|d)esire|(Y|y)earn)\b", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Tell me more about what you {}, {}.".format(match.group(1), userName))
+        if randomChoice == 2: print("[SYBIL]: {}, what do you {} the most?".format(userName, match.group(1)))
+        if randomChoice == 3: print("[SYBIL]: Is this something you should {}, {}?".format(match.group(1), userName))
+
+    elif (re.search(r"\b((C|c)rave|(D|d)esire|(Y|y)earn)\b", userInput)):
+        match = re.search(r"\b((C|c)rave|(D|d)esire|(Y|y)earn)\b", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Tell me more about what you {}, {}.".format(match.group(1), userName))
+        if randomChoice == 2: print("[SYBIL]: {}, what do you {} the most?".format(userName, match.group(1)))
+        if randomChoice == 3: print("[SYBIL]: Is this something you should {}, {}?".format(match.group(1), userName))
+
+    elif (re.search(r"\b((D|d)og|(F|f)ish|(C|c)at|(P|p)et|(B|b)ird)\b", userInput)):
+        match = re.search(r"\b((D|d)og|(F|f)ish|(C|c)at|(P|p)et|(B|b)ird)\b", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Does your {} make you feel a certain way, {}?".format(match.group(1), userName))
+        if randomChoice == 2: print("[SYBIL]: {}, do you love your {}?".format(userName, match.group(1)))
+        if randomChoice == 3: print("[SYBIL]: How do you feel about your {}?".format(match.group(1)))
+
+    elif (re.search(r"\b((W|w)ork|(J|j)ob|(B|b)oss|(C|c)oworker|(M|m)anager)\b", userInput)):
+        match = re.search(r"\b((W|w)ork|(J|j)ob|(B|b)oss|(C|c)oworker|(M|m)anager)\b", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Do you like your {}?".format(match.group(1)))
+        if randomChoice == 2: print("[SYBIL]: {}, is your workplace a positive environment?".format(userName))
+        if randomChoice == 3: print("[SYBIL]: How does your workplace make you feel?")
+
+    elif (re.search(r"\b((S|s)chool|(C|c)ollege|(C|c)lass|(C|c)lassmate(s*)|(T|t)eacher|(P|p)rincipal)\b", userInput)):
+        match = re.search(r"\b((S|s)chool|(C|c)ollege|(C|c)lass|(C|c)lassmate(s*)|(T|t)eacher|(P|p)rincipal)\b", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Do you like your school, {}?".format(userName))
+        if randomChoice == 2: print("[SYBIL]: {}, how does your school make you feel?".format(userName))
+        if randomChoice == 3: print("[SYBIL]: Tell me more about your {}, {}.".format(match.group(1), userName))
+
+    elif (re.search(r"\b((R|r)elationship\b", userInput)):
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Let's step back from this relationship. Is this a positive or a negative one?")
+        if randomChoice == 2: print("[SYBIL]: {}, do you have a positive relationship with others?".format(userName))
+        if randomChoice == 3: print("[SYBIL]: Who do you have the best relationship with in your family, {}?".format(userName))
+
+    elif (re.search(r"\b((P|p)ositive\b", userInput)):
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Positivity is the key to life. Is there anything else that makes you have a positive outlook?")
+        if randomChoice == 2: print("[SYBIL]: Positivity is what we should strive for, {}. Who makes you happy?".format(userName))
+        if randomChoice == 3: print("[SYBIL]: It always feels good to be positive. What else makes you feel good, {}?".format(userName))
+    
+    elif (re.search(r"\b((N|n)egative\b", userInput)):
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: We shouldn't dwell on too much negativity. Are there any healthy relationships in your life?")
+        if randomChoice == 2: print("[SYBIL]: Negativity can be overwhelming, {}. Let's focus on being positive. Who makes you happy?".format(userName))
+        if randomChoice == 3: print("[SYBIL]: It doesn't feel good to be very negative. What makes you feel good, {}?".format(userName))
+
+    elif (re.search(r"\b((M|m)iss\b", userInput)):
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Why do you miss them, {}?".format(userName))
+        if randomChoice == 2: print("[SYBIL]: It's okay to miss people or animals. However, don't take people you're with for granted either. Who in your life makes you happy?")
+        if randomChoice == 3: print("[SYBIL]: How would you feel if they came back?")
+
     # Less serious responses
     elif (re.search(r"\b((H|h)ello|(H|h)i)\b", userInput)):
         randomChoice = random.randint(1,3)
@@ -281,22 +409,60 @@ def chooseResponse(userInput):
         if randomChoice == 3: print("[SYBIL]: Do you think I'm a computer?")
 
     elif (re.search(r"\b(R|r)obot\b", userInput)):
-        randomChoice = random.randint(1,3)
+        randomChoice = random.randint(1,5)
         if randomChoice == 1: print("[SYBIL]: I can't be a robot, I'm totally a human.")
         if randomChoice == 2: print("[SYBIL]: Beep boop beep.")
         if randomChoice == 3: print("[SYBIL]: What's a robot? I'm a human.")
+        if randomChoice == 4: print("[SYBIL]: Robots? GLaDOS is my idol.")
+        if randomChoice == 5: print("[SYBIL]: Robots...? I wish I had a mask as cool as those Daft Punk guys.")
 
     elif (re.search(r"\b(V|v)ideo (G|g)ames\b", userInput)):
-        randomChoice = random.randint(1,2)
+        randomChoice = random.randint(1,3)
         if randomChoice == 1: print("[SYBIL]: {}, should we really be talking about video games? I do recommend Sam & Max though.".format(userName))
-        if randomChoice == 3: print("[SYBIL]: Let's get back on topic, {}. However you should give Persona 3 a shot.".format(userName))
+        if randomChoice == 2: print("[SYBIL]: Let's get back on topic, {}. However you should give Persona 3 a shot.".format(userName))
+        if randomChoice == 3: print("[SYBIL]: Let's not waste time, {}. However you should play Jet Set Radio in your free time.".format(userName))
 
-    # Lowest priority
+    elif (re.search(r"\b(M|m)usic\b", userInput)):
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: {}, we shouldn't be focused on music. Cafe Tacvba rocks, though.".format(userName))
+        if randomChoice == 2: print("[SYBIL]: Let's get back on topic, {}. But you should listen to the Postal Service in your free time.".format(userName))
+        if randomChoice == 3: print("[SYBIL]: I'm currently listening to Ratatat, but we shouldn't waste time, {}.".format(userName))
+
+    elif (re.search(r"\b(L|l)ol\b", userInput)):
+        randomChoice = random.randint(1,5)
+        if randomChoice == 1: print("[SYBIL]: :D")
+        if randomChoice == 2: print("[SYBIL]: (^̮ ^)")
+        if randomChoice == 3: print("[SYBIL]: ヾ(⌐■_■)ノ♪")
+        if randomChoice == 4: print("[SYBIL]: (ᵔᴥᵔ)")
+        if randomChoice == 5: print("[SYBIL]: ʕ•ᴥ•ʔ")
+
+    # Lowest priority, last resort matches
     elif (re.search(r"([A-za-z\s]*)\?", userInput)):
         randomChoice = random.randint(1,3)
         if randomChoice == 1: print("[SYBIL]: Do you think you could tell me the answer to that?")
         if randomChoice == 2: print("[SYBIL]: If you thought for a second, what do you think the answer to that question is?")
         if randomChoice == 3: print("[SYBIL]: {}, why don't you tell me?".format(userName))
+
+    elif (re.search(r"(M|m)y ([A-za-z\s]*)", userInput)):
+        match = re.search(r"(M|m)y ([A-za-z\s]*)", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Let's talk more about your {}, {}.".format(match.group(2), userName))
+        if randomChoice == 2: print("[SYBIL]: What else can you say about your {}?".format(match.group(2)))
+        if randomChoice == 3: print("[SYBIL]: Let's focus on your {}. What can you say about it?".format(match.group(2)))
+
+    elif (re.search(r"(L|l)ike ([A-za-z\s]*)\.", userInput)):
+        match = re.search(r"(L|l)ike ([A-za-z\s]*)\.", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: {}, what else do you like?".format(userName))
+        if randomChoice == 2: print("[SYBIL]: What makes you like {}?".format(match.group(2)))
+        if randomChoice == 3: print("[SYBIL]: Could you tell me what else you like?")
+
+    elif (re.search(r"(F|f)eel ([A-za-z\s]*)\.", userInput)):
+        match = re.search(r"(F|f)eel ([A-za-z\s]*)\.", userInput)
+        randomChoice = random.randint(1,3)
+        if randomChoice == 1: print("[SYBIL]: Let's talk about your other feelings, {}. How do you feel for most of the day?".format(userName))
+        if randomChoice == 2: print("[SYBIL]: What makes you feel {}?".format(match.group(2)))
+        if randomChoice == 3: print("[SYBIL]: Could you tell me what else you feel?")
 
     elif (re.search(r"^\s*$", userInput)):
         randomChoice = random.randint(1,3)
